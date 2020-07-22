@@ -9,10 +9,24 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- task: GitHubComment@0
-  inputs:
-    gitHubConnection: 'Arsasana'
-    repositoryName: 'Arsasana/azure-powershell'
-    id: '1'
-    comment: 'Commenting from pipeline'
+jobs:
+- job:
+  steps:
+  - task: GitHubComment@0
+    continueOnError: true
+    inputs:
+      gitHubConnection: 'Arsasana'
+      repositoryName: 'Arsasana/azure-powershell'
+      id: '1'
+      comment: 'Commenting from pipeline'
+
+- deployment: some_deployment
+  environment: arsasanaEnv
+  strategy: 
+      runOnce:
+        deploy:
+          steps:
+            - script: echo "sample deployment job"
+
+
+
