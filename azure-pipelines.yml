@@ -21,11 +21,17 @@ jobs:
 
 - deployment: some_deployment
   environment: arsasanaEnv
-  # strategy: 
-  #     runOnce:
-  #       deploy:
-  #         steps:
-  #           - script: echo "sample deployment job"
+  strategy: 
+      runOnce:
+        deploy:
+          steps:
+            - task: GitHubComment@0
+              continueOnError: true
+              inputs:
+                gitHubConnection: 'Arsasana'
+                repositoryName: 'Arsasana/azure-powershell'
+                id: '1'
+                comment: 'Commenting from pipeline'
 
 
 
